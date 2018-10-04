@@ -14,25 +14,39 @@ namespace TR4IT_aa
 {
     public partial class Form1 : Form
     {
-        MySqlConnection conn = new MySqlConnection("Server = localhost; User Id=''; Password=''; Database=db_cs1");
-        MySqlDataAdapter adapter = new MySqlDataAdapter ();
-        MySqlCommand command = new MySqlCommand();
-        public DataSet ds = new DataSet();
+
+		const string DATABASE = "db_cs1";
+		const string SERVER = "localhost";
+		const string USER = "root";
+		const string PASS = "root";
+		const string PORT = "3306";
+
+		MySqlConnection conn;
+		MySqlDataAdapter adapter;
+		MySqlCommand command;
+		DataSet ds;
 
         public Form1()
         {
             InitializeComponent();
+			OpenConnection();
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-
+			
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            GetRecords();     
+			GetRecords();  
         }
+
+		private void OpenConnection()
+		{
+			conn = new MySqlConnection($"Server={SERVER};Port={PORT};Database={DATABASE};Uid={USER};Pwd={PASS};");
+			conn.Open();
+		}
 
         public void GetRecords()
         {
